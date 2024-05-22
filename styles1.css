@@ -1,0 +1,89 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400; /* Adjusted font weight */
+  line-height: 1.7;
+  color: #ffeba7;
+  background-color: #1f2029;
+}
+
+/* Adjusted link styles */
+a:hover {
+  text-decoration: underline; /* Added underline on hover */
+}
+
+.link {
+  color: #ffeba7;
+}
+
+.link:hover {
+  color: #c4c3ca;
+}
+
+/* Adjusted paragraph and heading styles */
+p {
+  font-weight: 400; /* Adjusted font weight */
+  font-size: 16px; /* Increased font size */
+  margin-bottom: 10px; /* Added margin for better spacing */
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 24px; /* Increased font size */
+  margin-bottom: 20px; /* Added margin for better spacing */
+}
+
+h6 span {
+  padding: 0 20px;
+  font-weight: 700;
+}
+
+/* Adjusted checkbox styles */
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+  display: none;
+}
+
+/* Adjusted label styles */
+.checkbox:checked + label,
+.checkbox:not(:checked) + label {
+  /* Adjusted label dimensions */
+  width: 32px;
+  height: 16px;
+  /* Adjusted label margin */
+  margin: 10px auto;
+}
+
+/* Adjusted checkbox icon styles */
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before {
+  width: 32px; /* Adjusted width */
+  height: 32px; /* Adjusted height */
+  line-height: 32px; /* Adjusted line height */
+}
+
+/* Adjusted card styles */
+.card-front,
+.card-back {
+  border-radius: 8px; /* Increased border radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+}
+
+/* Adjusted form input styles */
+.form-style {
+  padding: 13px 20px;
+  font-weight: 500;
+  border-radius: 8px; /* Increased border radius */
+  font-size: 16px; /* Increased font size */
+  line-height: 1.6;
+  outline: none;
+  background-color: #27293d; /* Darkened background color */
+  border: 1px solid #43455e; /* Added border for contrast */
+  color: #c4c3ca;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-style:focus,
+.form-style:active {
+  border-color: #ffeba7; /* Changed border color on focus */
+  box-shadow: 0 0 0 3px rgba(255, 235, 167, 0.3); /* Added box shadow on focus */
+}

@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.paper {
+    width: 21cm; /* A4 width */
+    height: 14.7cm; /* A4 height */
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+

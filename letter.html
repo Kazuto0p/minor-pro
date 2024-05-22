@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leave Letter</title>
+    <link rel="stylesheet" type="text/css" href="styles5.css">
+</head>
+<body>
+    <div class="paper">
+        <h1>Leave Letter</h1>
+        <p>Date: <span id="leaveDate"></span></p>
+
+        <p>To,</p>
+        <address id="leaveAddress"></address>
+
+        <!-- <p>Dear <span id="recipientName"></span>,</p> -->
+
+        <p>I am writing to request leave for the following reason: <span id="leaveReason"></span>.</p>
+
+        <p>During my absence, I will ensure that my work responsibilities are properly delegated and that there will be no disruption to the team's workflow. If there are any urgent matters that require my attention during my absence, please do not hesitate to contact me at <span id="yourPhone"></span>.</p>
+
+        <p>I kindly request that my leave be approved, and I will be available for any necessary handover or preparations prior to my departure. I will also be reachable for any questions or clarifications.</p>
+
+        <p>Sincerely,<br>
+        <span id="yourName"></span></p>
+
+        <button id="downloadBtn">Download as PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get the form data from the URL parameters and insert it into the leave letter
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Populate leave letter with form data from URL parameters
+            document.getElementById('leaveDate').textContent = urlParams.get('start_date');
+            document.getElementById('leaveAddress').textContent = urlParams.get('HOD');
+            // document.getElementById('recipientName').textContent = urlParams.get('employee_name');
+            document.getElementById('leaveReason').textContent = urlParams.get('reason');
+            document.getElementById('yourPhone').textContent = urlParams.get('phone');
+            document.getElementById('yourName').textContent = urlParams.get('employee_name');
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const element = document.querySelector('.paper');
+            html2pdf()
+                .from(element)
+                .save('leave_letter.pdf');
+        });
+    </script>
+</body>
+</html>

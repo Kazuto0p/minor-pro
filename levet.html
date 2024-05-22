@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dots Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20200701/ourmid/pngtree-original-design-business-office-management-system-background-banner-image_346107.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+        }
+        .container {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="container">
+        <h1>Leave Management System</h1>
+        <button class="button" onclick="location.href='gletter.html'">Leave Type</button>
+        <button class="button" onclick="goBack()">Back</button>
+    </div>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        let hue = 0;
+
+        const mouse = {
+            x: undefined,
+            y: undefined
+        };
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        setCanvasSize(); // Set initial size
+
+        const dotArray = [];
+
+        class Dot {
+            constructor() {
+                this.x = mouse.x;
+                this.y = mouse.y;
+
+                this.size = 6;
+                this.speedx = Math.random() * 4 - 2;
+                this.speedy = Math.random() * 4 - 2;
+                this.color = `hsl(${hue}, 100%, 50%)`;
+            }
+
+            update() {
+                this.x += this.speedx;
+                this.y += this.speedy;
+                if (this.size > 0.3) this.size -= 0.7;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createDots() {
+            for (let i = 0; i < dotArray.length; i++) {
+                dotArray[i].update();
+                dotArray[i].draw();
+
+                for (let j = 0; j < dotArray.length; j++) {
+                    const dx = dotArray[i].x - dotArray[j].x;
+                    const dy = dotArray[i].y - dotArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 160) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = dotArray[i].color;
+                        ctx.lineWidth = dotArray[i].size / 4;
+                        ctx.moveTo(dotArray[i].x, dotArray[i].y);
+                        ctx.lineTo(dotArray[j].x, dotArray[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+
+                if (dotArray[i].size < 0.4) {
+                    dotArray.splice(i, 1);
+                    i++;
+                }
+            }
+        }
+
+        function animate() {
+            hue++;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            createDots();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener("pointermove", function (e) {
+            mouse.x = e.x;
+            mouse.y = e.y;
+            dotArray.push(new Dot());
+        });
+
+        window.addEventListener("resize", setCanvasSize);
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
+
